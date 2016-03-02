@@ -25,11 +25,15 @@
 (setq-default indent-tabs-mode nil)
 
 ;; emacs package management
-;; use MELPA stable
+
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+             
 
 (setq package-user-dir (concat user-emacs-directory "elpa"))
 (add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
@@ -62,10 +66,10 @@ re-downloaded in order to locate PACKAGE."
   (exec-path-from-shell-initialize))
 
 (dolist (file '("cfg-paredit.el"
-		"cfg-flycheck.el"
 		"cfg-hlsexp.el"
 		"cfg-cider.el"
-                "cfg-cljrefactor.el"))
+                 "cfg-cljrefactor.el"
+                ))
   (load (concat dotfiles-lisp-dir file)))
 
 
@@ -81,3 +85,17 @@ re-downloaded in order to locate PACKAGE."
 
 (when (file-exists-p (concat dotfiles-lisp-dir "user-customizations.el"))
   (load (concat dotfiles-lisp-dir "user-customizations.el")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (undo-tree smex rainbow-delimiters hl-sexp exec-path-from-shell company clj-refactor))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
